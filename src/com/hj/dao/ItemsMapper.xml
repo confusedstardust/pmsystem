@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hj.dao.ItemsMapper">
+  <resultMap id="BaseResultMap" type="com.hj.pojo.Items">
+    <result column="itemsname" jdbcType="VARCHAR" property="itemsname" />
+    <result column="itemsid" jdbcType="INTEGER" property="itemsid" />
+    <result column="itemscount" jdbcType="INTEGER" property="itemscount" />
+    <result column="itempicture" jdbcType="VARCHAR" property="itempicture" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    itemsname, itemsid, itemscount, itempicture
+  </sql>
+  <select id="selectByExample" parameterType="com.hj.pojo.ItemsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from items
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.hj.pojo.ItemsExample">
+    delete from items
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hj.pojo.Items">
+    insert into items (itemsname, itemsid, itemscount, 
+      itempicture)
+    values (#{itemsname,jdbcType=VARCHAR}, #{itemsid,jdbcType=INTEGER}, #{itemscount,jdbcType=INTEGER}, 
+      #{itempicture,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hj.pojo.Items">
+    insert into items
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemsname != null">
+        itemsname,
+      </if>
+      <if test="itemsid != null">
+        itemsid,
+      </if>
+      <if test="itemscount != null">
+        itemscount,
+      </if>
+      <if test="itempicture != null">
+        itempicture,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemsname != null">
+        #{itemsname,jdbcType=VARCHAR},
+      </if>
+      <if test="itemsid != null">
+        #{itemsid,jdbcType=INTEGER},
+      </if>
+      <if test="itemscount != null">
+        #{itemscount,jdbcType=INTEGER},
+      </if>
+      <if test="itempicture != null">
+        #{itempicture,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hj.pojo.ItemsExample" resultType="java.lang.Integer">
+    select count(*) from items
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update items
+    <set>
+      <if test="record.itemsname != null">
+        itemsname = #{record.itemsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemsid != null">
+        itemsid = #{record.itemsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.itemscount != null">
+        itemscount = #{record.itemscount,jdbcType=INTEGER},
+      </if>
+      <if test="record.itempicture != null">
+        itempicture = #{record.itempicture,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update items
+    set itemsname = #{record.itemsname,jdbcType=VARCHAR},
+      itemsid = #{record.itemsid,jdbcType=INTEGER},
+      itemscount = #{record.itemscount,jdbcType=INTEGER},
+      itempicture = #{record.itempicture,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+
+
+  <select id="queryallitems"  resultMap="BaseResultMap">
+    select itemsname,itemsid,itemscount from items
+  </select>
+  <delete id="deleteItem" parameterType="java.lang.Integer">
+    delete from items where itemsid=#{itemsid}
+  </delete>
+  <select id="queryItemByname" parameterType="java.lang.String"  resultMap="BaseResultMap">
+    select itemsname,itemsid,itemscount from items where itemsname like concat('%',#{itemsname},'%')
+  </select>
+  <insert id="insertItem" parameterType="com.hj.pojo.Items">
+    insert into items (itemsname, itemscount)
+    values (#{itemsname},#{itemscount})
+  </insert>
+  <update id="setItemsCont" parameterType="java.lang.Integer">
+    update items
+    set    itemscount = #{itemscount} where  itemsid = #{itemsid}
+  </update>
+</mapper>

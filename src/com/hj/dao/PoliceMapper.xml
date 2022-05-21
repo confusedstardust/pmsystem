@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hj.dao.PoliceMapper" >
+  <resultMap id="BaseResultMap" type="com.hj.pojo.Police" >
+    <result column="pname" property="pname" jdbcType="VARCHAR" />
+    <result column="pnum" property="pnum" jdbcType="VARCHAR" />
+    <result column="plevel" property="plevel" jdbcType="INTEGER" />
+    <result column="ppsw" property="ppsw" jdbcType="VARCHAR" />
+    <result column="ptel" property="ptel" jdbcType="VARCHAR" />
+    <result column="psex" property="psex" jdbcType="VARCHAR" />
+    <result column="departid" property="departid" jdbcType="INTEGER" />
+    <result column=" levelrank" property="levelrank" jdbcType="INTEGER" />
+    <result column=" pidcard" property="pidcard" jdbcType="VARCHAR" />
+    <result column="picuture" property="picuture" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pname, pnum, plevel, ppsw, ptel, psex, departid, " levelrank"
+  </sql>
+  <sql id="Blob_Column_List" >
+    picuture
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hj.pojo.PoliceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from police
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.hj.pojo.PoliceExample" >
+    delete from police
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hj.pojo.Police" >
+    insert into police (pname, pnum, plevel, 
+      ppsw, ptel, psex, departid, 
+      " levelrank", picuture)
+    values (#{pname,jdbcType=VARCHAR}, #{pnum,jdbcType=INTEGER}, #{plevel,jdbcType=INTEGER}, 
+      #{ppsw,jdbcType=VARCHAR}, #{ptel,jdbcType=VARCHAR}, #{psex,jdbcType=VARCHAR}, #{departid,jdbcType=INTEGER}, 
+      #{levelrank,jdbcType=INTEGER}, #{picuture,jdbcType=VARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hj.pojo.Police" >
+    insert into police
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pname != null" >
+        pname,
+      </if>
+      <if test="pnum != null" >
+        pnum,
+      </if>
+      <if test="plevel != null" >
+        plevel,
+      </if>
+      <if test="ppsw != null" >
+        ppsw,
+      </if>
+      <if test="ptel != null" >
+        ptel,
+      </if>
+      <if test="psex != null" >
+        psex,
+      </if>
+      <if test="departid != null" >
+        departid,
+      </if>
+      <if test="levelrank != null" >
+        " levelrank",
+      </if>
+      <if test="picuture != null" >
+        picuture,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pname != null" >
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pnum != null" >
+        #{pnum,jdbcType=INTEGER},
+      </if>
+      <if test="plevel != null" >
+        #{plevel,jdbcType=INTEGER},
+      </if>
+      <if test="ppsw != null" >
+        #{ppsw,jdbcType=VARCHAR},
+      </if>
+      <if test="ptel != null" >
+        #{ptel,jdbcType=VARCHAR},
+      </if>
+      <if test="psex != null" >
+        #{psex,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=INTEGER},
+      </if>
+      <if test="levelrank != null" >
+        #{levelrank,jdbcType=INTEGER},
+      </if>
+      <if test="picuture != null" >
+        #{picuture,jdbcType=VARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hj.pojo.PoliceExample" resultType="java.lang.Integer" >
+    select count(*) from police
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update police
+    <set >
+      <if test="record.pname != null" >
+        pname = #{record.pname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pnum != null" >
+        pnum = #{record.pnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.plevel != null" >
+        plevel = #{record.plevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.ppsw != null" >
+        ppsw = #{record.ppsw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ptel != null" >
+        ptel = #{record.ptel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.psex != null" >
+        psex = #{record.psex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departid != null" >
+        departid = #{record.departid,jdbcType=INTEGER},
+      </if>
+      <if test="record.levelrank != null" >
+        " levelrank" = #{record.levelrank,jdbcType=INTEGER},
+      </if>
+      <if test="record.picuture != null" >
+        picuture = #{record.picuture,jdbcType=VARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update police
+    set pname = #{record.pname,jdbcType=VARCHAR},
+      pnum = #{record.pnum,jdbcType=INTEGER},
+      plevel = #{record.plevel,jdbcType=INTEGER},
+      ppsw = #{record.ppsw,jdbcType=VARCHAR},
+      ptel = #{record.ptel,jdbcType=VARCHAR},
+      psex = #{record.psex,jdbcType=VARCHAR},
+      departid = #{record.departid,jdbcType=INTEGER},
+      " levelrank" = #{record.levelrank,jdbcType=INTEGER},
+      picuture = #{record.picuture,jdbcType=VARBINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update police
+    set pname = #{record.pname,jdbcType=VARCHAR},
+      pnum = #{record.pnum,jdbcType=INTEGER},
+      plevel = #{record.plevel,jdbcType=INTEGER},
+      ppsw = #{record.ppsw,jdbcType=VARCHAR},
+      ptel = #{record.ptel,jdbcType=VARCHAR},
+      psex = #{record.psex,jdbcType=VARCHAR},
+      departid = #{record.departid,jdbcType=INTEGER},
+      " levelrank" = #{record.levelrank,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+
+
+  <select id="findPolice" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+        from police
+        where pnum=#{pnum} and ppsw=#{ppsw}
+  </select>
+  <select id="checkIdentity" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from police
+    where pnum=#{pnum} and pidcard=#{pidcard} and pname=#{pname}
+  </select>
+  <update id="updatePpsw" parameterType="java.lang.String" >
+    UPDATE police SET ppsw=#{ppsw} WHERE pidcard=#{pidcard}
+  </update>
+  <update id="updatePtel" parameterType="java.lang.String" >
+    UPDATE police SET ptel=#{ptel} WHERE pnum=#{pnum}
+  </update>
+  <update id="updateImage" parameterType="java.lang.String" >
+    UPDATE police SET picuture=#{picuture} WHERE pnum=#{pnum}
+  </update>
+  <select id="queryAllMember" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from police
+  </select>
+  <insert id="insertMember"  parameterType="com.hj.pojo.Police" >
+    insert  into police ( pname, pnum,plevel,ppsw,ptel,psex,
+                         departid,levelrank,pidcard)
+    values (#{pname}, #{pnum},#{plevel}, #{ppsw},#{ptel},
+            #{psex}, #{departid},#{levelrank},#{pidcard})
+  </insert>
+<delete id="deletePolice" parameterType="java.lang.String">
+  delete from police where pnum=#{pnum}
+</delete>
+  <update id="updatePoliceInfo" parameterType="com.hj.pojo.Police" >
+    update police
+    set pname = #{pname},
+        plevel = #{plevel},
+        ppsw = #{ppsw},
+        ptel = #{ptel},
+        psex = #{psex},
+        departid = #{departid},
+        pidcard=#{pidcard},
+        levelrank=#{levelrank}
+        where pnum=#{pnum}
+
+  </update>
+  <select id="querysamepnum" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(pnum) from police where pnum=#{pnum}
+  </select>
+
+  <select id="queryByName" parameterType="java.lang.String" resultType="com.hj.pojo.Police">
+    select * from police where pname like concat('%',#{pname},'%')
+  </select>
+  <select id="queryByPid" parameterType="java.lang.String" resultType="com.hj.pojo.Police">
+    select * from police where pnum=#{pnum}
+  </select>
+  <select id="queryByDepartid" parameterType="java.lang.String" resultType="com.hj.pojo.Police">
+    select * from police where departid=#{departid}
+  </select>
+  <select id="queryByPtel" parameterType="java.lang.String" resultType="com.hj.pojo.Police">
+    select * from police where ptel=#{ptel}
+  </select>
+
+
+  <select id="countIssue" resultType="java.lang.Integer">
+    SELECT COUNT(issueid) FROM issue
+  </select>
+  <select id="countMember" resultType="java.lang.Integer">
+    SELECT COUNT(pnum) FROM police
+  </select>
+  <select id="countNewIssue" resultType="java.lang.Integer">
+    SELECT COUNT(issuestartdate) FROM issue where issuestartdate>=#{issuestartdate}
+  </select>
+  <select id="countBydepartid" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    SELECT count(departid) from police where departid=#{departid}
+  </select>
+</mapper>

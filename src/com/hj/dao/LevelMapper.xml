@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hj.dao.LevelMapper" >
+  <resultMap id="BaseResultMap" type="com.hj.pojo.Level" >
+    <result column="levelid" property="levelid" jdbcType="INTEGER" />
+    <result column="levelname" property="levelname" jdbcType="VARCHAR" />
+    <result column="levelrank" property="levelrank" jdbcType="INTEGER" />
+    <result column="leveldetal" property="leveldetal" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    levelid, levelname, levelrank, leveldetal
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hj.pojo.LevelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.hj.pojo.LevelExample" >
+    delete from level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hj.pojo.Level" >
+    insert into level (levelid, levelname, levelrank, 
+      leveldetal)
+    values (#{levelid,jdbcType=INTEGER}, #{levelname,jdbcType=VARCHAR}, #{levelrank,jdbcType=INTEGER}, 
+      #{leveldetal,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hj.pojo.Level" >
+    insert into level
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="levelid != null" >
+        levelid,
+      </if>
+      <if test="levelname != null" >
+        levelname,
+      </if>
+      <if test="levelrank != null" >
+        levelrank,
+      </if>
+      <if test="leveldetal != null" >
+        leveldetal,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="levelid != null" >
+        #{levelid,jdbcType=INTEGER},
+      </if>
+      <if test="levelname != null" >
+        #{levelname,jdbcType=VARCHAR},
+      </if>
+      <if test="levelrank != null" >
+        #{levelrank,jdbcType=INTEGER},
+      </if>
+      <if test="leveldetal != null" >
+        #{leveldetal,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hj.pojo.LevelExample" resultType="java.lang.Integer" >
+    select count(*) from level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update level
+    <set >
+      <if test="record.levelid != null" >
+        levelid = #{record.levelid,jdbcType=INTEGER},
+      </if>
+      <if test="record.levelname != null" >
+        levelname = #{record.levelname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.levelrank != null" >
+        levelrank = #{record.levelrank,jdbcType=INTEGER},
+      </if>
+      <if test="record.leveldetal != null" >
+        leveldetal = #{record.leveldetal,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update level
+    set levelid = #{record.levelid,jdbcType=INTEGER},
+      levelname = #{record.levelname,jdbcType=VARCHAR},
+      levelrank = #{record.levelrank,jdbcType=INTEGER},
+      leveldetal = #{record.leveldetal,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <select id="findLevelInfo" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT * FROM level WHERE levelrank=#{levelrank}
+  </select>
+</mapper>

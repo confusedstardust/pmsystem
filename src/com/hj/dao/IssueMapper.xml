@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hj.dao.IssueMapper" >
+  <resultMap id="BaseResultMap" type="com.hj.pojo.Issue" >
+    <result column="issuedetail" property="issuedetail" jdbcType="VARCHAR" />
+    <result column="issueid" property="issueid" jdbcType="VARCHAR" />
+    <result column="issuetitle" property="issuetitle" jdbcType="VARCHAR" />
+    <result column="issueproccess" property="issueproccess" jdbcType="VARCHAR" />
+    <result column="logid" property="logid" jdbcType="INTEGER" />
+    <result column="issuestartdate" property="issuestartdate" jdbcType="TIMESTAMP" />
+    <result column="actdate" property="actdate" jdbcType="TIMESTAMP" />
+    <result column="pnum" property="pnum" jdbcType="VARCHAR" />
+    <result column="publiclevel" property="publiclevel" jdbcType="INTEGER" />
+    <result column="issuetype" property="issuetype" jdbcType="VARCHAR" />
+    <result column="issueaddress" property="issueaddress" jdbcType="VARCHAR" />
+    <result column="puteventmanname" property="puteventmanname" jdbcType="VARCHAR" />
+    <result column="chulijieguo" property="chulijieguo" jdbcType="VARCHAR" />
+    <result column="baojingfangshi" property="baojingfangshi" jdbcType="VARCHAR" />
+    <result column="baojingneirong" property="baojingneirong" jdbcType="VARCHAR" />
+    <result column="pickman" property="pickman" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    issuedetail, issueid, issuetitle, issueproccess, logid, issuestartdate, actdate, 
+    pnum, publiclevel, issuetype, issueaddress, puteventmanname, chulijieguo, baojingfangshi, 
+    baojingneirong, pickman
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hj.pojo.IssueExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from issue
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.hj.pojo.IssueExample" >
+    delete from issue
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hj.pojo.Issue" >
+    insert into issue (issuedetail, issueid, issuetitle, 
+      issueproccess, logid, issuestartdate, 
+      actdate, pnum, publiclevel, 
+      issuetype, issueaddress, puteventmanname, 
+      chulijieguo, baojingfangshi, baojingneirong, 
+      pickman)
+    values (#{issuedetail,jdbcType=VARCHAR}, #{issueid,jdbcType=VARCHAR}, #{issuetitle,jdbcType=VARCHAR}, 
+      #{issueproccess,jdbcType=INTEGER}, #{logid,jdbcType=INTEGER}, #{issuestartdate,jdbcType=TIMESTAMP}, 
+      #{actdate,jdbcType=TIMESTAMP}, #{pnum,jdbcType=VARCHAR}, #{publiclevel,jdbcType=INTEGER}, 
+      #{issuetype,jdbcType=VARCHAR}, #{issueaddress,jdbcType=VARCHAR}, #{puteventmanname,jdbcType=VARCHAR}, 
+      #{chulijieguo,jdbcType=VARCHAR}, #{baojingfangshi,jdbcType=VARCHAR}, #{baojingneirong,jdbcType=VARCHAR}, 
+      #{pickman,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hj.pojo.Issue" >
+    insert into issue
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="issuedetail != null" >
+        issuedetail,
+      </if>
+      <if test="issueid != null" >
+        issueid,
+      </if>
+      <if test="issuetitle != null" >
+        issuetitle,
+      </if>
+      <if test="issueproccess != null" >
+        issueproccess,
+      </if>
+      <if test="logid != null" >
+        logid,
+      </if>
+      <if test="issuestartdate != null" >
+        issuestartdate,
+      </if>
+      <if test="actdate != null" >
+        actdate,
+      </if>
+      <if test="pnum != null" >
+        pnum,
+      </if>
+      <if test="publiclevel != null" >
+        publiclevel,
+      </if>
+      <if test="issuetype != null" >
+        issuetype,
+      </if>
+      <if test="issueaddress != null" >
+        issueaddress,
+      </if>
+      <if test="puteventmanname != null" >
+        puteventmanname,
+      </if>
+      <if test="chulijieguo != null" >
+        chulijieguo,
+      </if>
+      <if test="baojingfangshi != null" >
+        baojingfangshi,
+      </if>
+      <if test="baojingneirong != null" >
+        baojingneirong,
+      </if>
+      <if test="pickman != null" >
+        pickman,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="issuedetail != null" >
+        #{issuedetail,jdbcType=VARCHAR},
+      </if>
+      <if test="issueid != null" >
+        #{issueid,jdbcType=VARCHAR},
+      </if>
+      <if test="issuetitle != null" >
+        #{issuetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="issueproccess != null" >
+        #{issueproccess,jdbcType=INTEGER},
+      </if>
+      <if test="logid != null" >
+        #{logid,jdbcType=INTEGER},
+      </if>
+      <if test="issuestartdate != null" >
+        #{issuestartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actdate != null" >
+        #{actdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pnum != null" >
+        #{pnum,jdbcType=VARCHAR},
+      </if>
+      <if test="publiclevel != null" >
+        #{publiclevel,jdbcType=INTEGER},
+      </if>
+      <if test="issuetype != null" >
+        #{issuetype,jdbcType=VARCHAR},
+      </if>
+      <if test="issueaddress != null" >
+        #{issueaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="puteventmanname != null" >
+        #{puteventmanname,jdbcType=VARCHAR},
+      </if>
+      <if test="chulijieguo != null" >
+        #{chulijieguo,jdbcType=VARCHAR},
+      </if>
+      <if test="baojingfangshi != null" >
+        #{baojingfangshi,jdbcType=VARCHAR},
+      </if>
+      <if test="baojingneirong != null" >
+        #{baojingneirong,jdbcType=VARCHAR},
+      </if>
+      <if test="pickman != null" >
+        #{pickman,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hj.pojo.IssueExample" resultType="java.lang.Integer" >
+    select count(*) from issue
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update issue
+    <set >
+      <if test="record.issuedetail != null" >
+        issuedetail = #{record.issuedetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueid != null" >
+        issueid = #{record.issueid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issuetitle != null" >
+        issuetitle = #{record.issuetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueproccess != null" >
+        issueproccess = #{record.issueproccess,jdbcType=INTEGER},
+      </if>
+      <if test="record.logid != null" >
+        logid = #{record.logid,jdbcType=INTEGER},
+      </if>
+      <if test="record.issuestartdate != null" >
+        issuestartdate = #{record.issuestartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.actdate != null" >
+        actdate = #{record.actdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pnum != null" >
+        pnum = #{record.pnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publiclevel != null" >
+        publiclevel = #{record.publiclevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.issuetype != null" >
+        issuetype = #{record.issuetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueaddress != null" >
+        issueaddress = #{record.issueaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.puteventmanname != null" >
+        puteventmanname = #{record.puteventmanname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chulijieguo != null" >
+        chulijieguo = #{record.chulijieguo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.baojingfangshi != null" >
+        baojingfangshi = #{record.baojingfangshi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.baojingneirong != null" >
+        baojingneirong = #{record.baojingneirong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pickman != null" >
+        pickman = #{record.pickman,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update issue
+    set issuedetail = #{record.issuedetail,jdbcType=VARCHAR},
+      issueid = #{record.issueid,jdbcType=VARCHAR},
+      issuetitle = #{record.issuetitle,jdbcType=VARCHAR},
+      issueproccess = #{record.issueproccess,jdbcType=INTEGER},
+      logid = #{record.logid,jdbcType=INTEGER},
+      issuestartdate = #{record.issuestartdate,jdbcType=TIMESTAMP},
+      actdate = #{record.actdate,jdbcType=TIMESTAMP},
+      pnum = #{record.pnum,jdbcType=VARCHAR},
+      publiclevel = #{record.publiclevel,jdbcType=INTEGER},
+      issuetype = #{record.issuetype,jdbcType=VARCHAR},
+      issueaddress = #{record.issueaddress,jdbcType=VARCHAR},
+      puteventmanname = #{record.puteventmanname,jdbcType=VARCHAR},
+      chulijieguo = #{record.chulijieguo,jdbcType=VARCHAR},
+      baojingfangshi = #{record.baojingfangshi,jdbcType=VARCHAR},
+      baojingneirong = #{record.baojingneirong,jdbcType=VARCHAR},
+      pickman = #{record.pickman,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+  <!--  issue中的issueid与rlmtable中的isssueid一样，后者多了个s-->
+  <insert id="insertIssue" parameterType="com.hj.pojo.Issue">
+    insert into issue (actdate, baojingfangshi,
+                                  issueaddress, issuestartdate,
+                                  issueid,issuetitle,issueproccess,
+                                  chulijieguo,pickman,puteventmanname,
+                                  issuedetail,pnum,issuetype,baojingneirong)
+    values ( #{actdate}, #{baojingfangshi},
+             #{issueaddress}, #{issuestartdate},
+             #{issueid},#{issuetitle},#{issueproccess},
+            #{chulijieguo},#{pickman},#{puteventmanname},
+            #{issuedetail},#{pnum},#{issuetype},#{baojingneirong})
+  </insert>
+  
+  <select id="queryIssueByPnum"  resultMap="BaseResultMap" parameterType="java.lang.String">
+    select * from issue where pnum=#{pnum}
+  </select>
+  
+  <update id="updateIssueInfo" parameterType="com.hj.pojo.Issue">
+    UPDATE issue SET issuetype=#{issuetype},chulijieguo=#{chulijieguo},
+    issueproccess=#{issueproccess},puteventmanname=#{puteventmanname}
+    WHERE issueid=#{issueid}
+  </update>
+
+  <select id="queryByname" parameterType="java.lang.String" resultType="com.hj.pojo.Issue">
+    select issueid,issuetitle from issue where issuetitle like concat('%',#{arg},'%') and pnum=#{pnum} and issueid!='1' ORDER BY actdate desc
+  </select>
+  <select id="queryByIssueid" parameterType="java.lang.String" resultType="com.hj.pojo.Issue">
+    select * from issue where issueid=#{arg}
+  </select>
+  <select id="queryIssueType"  resultType="java.lang.String">
+    SELECT DISTINCT
+      issuetype
+    FROM
+      issue
+  </select>
+
+  <select id="countIssuetypeTimes" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT
+      count( issuetype )
+    FROM
+      issue
+    WHERE
+      issuetype =#{issuetype}
+  </select>
+  <select id="queryIssueProcess"  resultType="java.lang.String">
+    SELECT DISTINCT
+      issueproccess
+    FROM
+      issue
+  </select>
+  <select id="countIssueProcessTimes" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT
+      count( issueproccess )
+    FROM
+      issue
+    WHERE
+      issueproccess =#{issueproccess}
+  </select>
+<!--  根据进度查询案件-->
+  <select id="queryIssueByProcess"  resultType="com.hj.pojo.Issue">
+    select * from issue where issueproccess=#{arg}
+  </select>
+
+
+</mapper>

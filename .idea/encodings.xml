@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/com/com/hj/controller/ConLoanerController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/controller/Link.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/controller/LoanManageController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/controller/LoanapplyController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/controller/PersonalController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/controller/RepaymentController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/controller/UserController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/dao/UserDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/pojo/Auditing.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/pojo/Overdue.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/pojo/PageBean.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/pojo/Repayment.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/pojo/User.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/service/UserService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/service/impl/ConloanerServiceImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/service/impl/LoanManageServiceImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/service/impl/LoanapplyServiceImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/service/impl/PersonalServiceImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/service/impl/RepaymentServiceImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/service/impl/UserServiceImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/utils/FileUploadAndDownloandUtils.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/com/com/hj/utils/VerifyCode.java" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

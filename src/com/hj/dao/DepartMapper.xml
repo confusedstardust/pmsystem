@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hj.dao.DepartMapper" >
+  <resultMap id="BaseResultMap" type="com.hj.pojo.Depart" >
+    <result column="departname" property="departname" jdbcType="VARCHAR" />
+    <result column="departid" property="departid" jdbcType="INTEGER" />
+    <result column="departroot" property="departroot" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    departname, departid, departroot
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hj.pojo.DepartExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from depart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.hj.pojo.DepartExample" >
+    delete from depart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hj.pojo.Depart" >
+    insert into depart (departname , departroot
+      )
+    values (#{departname},  #{departroot}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hj.pojo.Depart" >
+    insert into depart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="departname != null" >
+        departname,
+      </if>
+      <if test="departid != null" >
+        departid,
+      </if>
+      <if test="departroot != null" >
+        departroot,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="departname != null" >
+        #{departname,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null" >
+        #{departid,jdbcType=INTEGER},
+      </if>
+      <if test="departroot != null" >
+        #{departroot,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hj.pojo.DepartExample" resultType="java.lang.Integer" >
+    select count(*) from depart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update depart
+    <set >
+      <if test="record.departname != null" >
+        departname = #{record.departname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departid != null" >
+        departid = #{record.departid,jdbcType=INTEGER},
+      </if>
+      <if test="record.departroot != null" >
+        departroot = #{record.departroot,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update depart
+    set departname = #{record.departname,jdbcType=VARCHAR},
+      departid = #{record.departid,jdbcType=INTEGER},
+      departroot = #{record.departroot,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="FindDepartInfo" parameterType="java.lang.Integer" resultType="com.hj.pojo.Depart">
+    select * from depart where departid=#{departid}
+  </select>
+  <select id="FindDepartList" resultType="com.hj.pojo.Depart">
+    select * from depart
+  </select>
+  <delete id="deleteBydepartid" parameterType="java.lang.Integer" >
+    delete from depart where departid=#{departid}
+  </delete>
+  <update id="updateBydepartid" parameterType="com.hj.pojo.Depart" >
+    update depart set departname=#{departname},departroot=#{departroot} where departid=#{departid}
+  </update>
+</mapper>

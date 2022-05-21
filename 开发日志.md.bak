@@ -1,0 +1,19 @@
+2.12
+    1.数据库中serverTimezone设置为UTC(世界统一时间){utc必须大写才生效}，会比北京时间慢8小时，
+出现今天前台和后台数据都一致，数据库慢了一天的情况。(但设置成其他timezone会出现没有时区映射入口的错误)，则就此作罢。
+    2.list<apply>集合传到前台后是一个json，但必须先将他stringify再转化成json(问题目前不清楚，可能是因为传过去的json数组不严格符合json格式)。
+    3.后台的calendar类把时间加1的方法测试以后，屁用没有，又删了。
+    4.准备把applytypeid设定为表示申请状态的字段，分别表示"不通过","通过","审核中"。
+2.15
+    1.数据库中的表order 与关键字重名，所以在写sql时要给表加上引号，必须是esc下面的``引号，单引号也会报错。
+    2.json转集合、json转对象，详见jsontools工具类
+2.22
+    1.ajax传输json文件不能不能有type：post 设定，会导致空指针异常。
+2.27
+    1.js对象在创建后传给后台前，要stringify，不然获取不到
+    2.responsebody注解除了用于异步返回还可以返回字符串，如果不加则返回的是url。
+    3.用字符串异步返回的中文全部变成问号，可以在requertmapping注解下加入produces = "text/html;charset=UTF-8" 
+3.4
+    1. 写sql非等于xxx时要加引号如issueid！=‘xxxx’，不写引号会导致以1开头的issueid被筛选掉，大坑
+3.15
+    1.map

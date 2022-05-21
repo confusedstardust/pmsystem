@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hj.dao.CaMapper" >
+  <resultMap id="BaseResultMap" type="com.hj.pojo.Ca" >
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="case1" property="case1" jdbcType="INTEGER" />
+    <result column="time1" property="time1" jdbcType="INTEGER" />
+    <result column="case2" property="case2" jdbcType="INTEGER" />
+    <result column="time2" property="time2" jdbcType="INTEGER" />
+    <result column="case3" property="case3" jdbcType="INTEGER" />
+    <result column="time3" property="time3" jdbcType="INTEGER" />
+    <result column="case4" property="case4" jdbcType="INTEGER" />
+    <result column="time4" property="time4" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    name, id, type, case1, time1, case2, time2, case3, time3, case4, time4
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hj.pojo.CaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ca
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.hj.pojo.CaExample" >
+    delete from ca
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hj.pojo.Ca" >
+    insert into ca (name, id, type, 
+      case1, time1, case2, 
+      time2, case3, time3, 
+      case4, time4)
+    values (#{name,jdbcType=VARCHAR}, #{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
+      #{case1,jdbcType=INTEGER}, #{time1,jdbcType=INTEGER}, #{case2,jdbcType=INTEGER}, 
+      #{time2,jdbcType=INTEGER}, #{case3,jdbcType=INTEGER}, #{time3,jdbcType=INTEGER}, 
+      #{case4,jdbcType=INTEGER}, #{time4,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hj.pojo.Ca" >
+    insert into ca
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="case1 != null" >
+        case1,
+      </if>
+      <if test="time1 != null" >
+        time1,
+      </if>
+      <if test="case2 != null" >
+        case2,
+      </if>
+      <if test="time2 != null" >
+        time2,
+      </if>
+      <if test="case3 != null" >
+        case3,
+      </if>
+      <if test="time3 != null" >
+        time3,
+      </if>
+      <if test="case4 != null" >
+        case4,
+      </if>
+      <if test="time4 != null" >
+        time4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="case1 != null" >
+        #{case1,jdbcType=INTEGER},
+      </if>
+      <if test="time1 != null" >
+        #{time1,jdbcType=INTEGER},
+      </if>
+      <if test="case2 != null" >
+        #{case2,jdbcType=INTEGER},
+      </if>
+      <if test="time2 != null" >
+        #{time2,jdbcType=INTEGER},
+      </if>
+      <if test="case3 != null" >
+        #{case3,jdbcType=INTEGER},
+      </if>
+      <if test="time3 != null" >
+        #{time3,jdbcType=INTEGER},
+      </if>
+      <if test="case4 != null" >
+        #{case4,jdbcType=INTEGER},
+      </if>
+      <if test="time4 != null" >
+        #{time4,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hj.pojo.CaExample" resultType="java.lang.Integer" >
+    select count(*) from ca
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ca
+    <set >
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.case1 != null" >
+        case1 = #{record.case1,jdbcType=INTEGER},
+      </if>
+      <if test="record.time1 != null" >
+        time1 = #{record.time1,jdbcType=INTEGER},
+      </if>
+      <if test="record.case2 != null" >
+        case2 = #{record.case2,jdbcType=INTEGER},
+      </if>
+      <if test="record.time2 != null" >
+        time2 = #{record.time2,jdbcType=INTEGER},
+      </if>
+      <if test="record.case3 != null" >
+        case3 = #{record.case3,jdbcType=INTEGER},
+      </if>
+      <if test="record.time3 != null" >
+        time3 = #{record.time3,jdbcType=INTEGER},
+      </if>
+      <if test="record.case4 != null" >
+        case4 = #{record.case4,jdbcType=INTEGER},
+      </if>
+      <if test="record.time4 != null" >
+        time4 = #{record.time4,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ca
+    set name = #{record.name,jdbcType=VARCHAR},
+      id = #{record.id,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      case1 = #{record.case1,jdbcType=INTEGER},
+      time1 = #{record.time1,jdbcType=INTEGER},
+      case2 = #{record.case2,jdbcType=INTEGER},
+      time2 = #{record.time2,jdbcType=INTEGER},
+      case3 = #{record.case3,jdbcType=INTEGER},
+      time3 = #{record.time3,jdbcType=INTEGER},
+      case4 = #{record.case4,jdbcType=INTEGER},
+      time4 = #{record.time4,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+
+  <select id="nvpy" parameterType="java.lang.Integer" resultType="map">
+    SELECT
+      ( SELECT ( SUM( case1 ) + SUM( case2 ) ) / 10 FROM ca WHERE id = #{id} AND type = 'teng' ) as a1,
+      ( SELECT ( SUM( case1 ) + SUM( case2 ) ) / 10 FROM ca WHERE id = #{id} AND type = 'feiteng' )as b1 ,
+      ( SELECT ( SUM( time1 ) + SUM( time2 ) ) / 10 FROM ca WHERE id = #{id} AND type = 'teng' ) as c1,
+      ( SELECT ( SUM( time1 ) + SUM( time2 ) ) / 10 FROM ca WHERE id = #{id} AND type = 'feiteng' )as d1,
+
+      ( SELECT ( SUM( case3 ) + SUM( case4 ) ) / 10 FROM ca WHERE id = #{id} AND type = 'teng' )as a2  ,
+      ( SELECT ( SUM( case3 ) + SUM( case4 ) ) / 10 FROM ca WHERE id = #{id} AND type = 'feiteng' )as b2,
+      ( SELECT ( SUM( time3 ) + SUM( time4 ) ) / 10 FROM ca WHERE id = #{id} AND type = 'teng' ) as c2,
+      ( SELECT ( SUM( time3 ) + SUM( time4 ) ) / 10 FROM ca WHERE id = #{id} AND type = 'feiteng' ) as d2
+  </select>
+</mapper>

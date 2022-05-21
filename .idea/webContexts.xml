@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/MemberPage.jsp" value="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp" />
+        <entry key="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/editPage.jsp" value="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp" />
+        <entry key="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/holidayManagePage.jsp" value="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp" />
+        <entry key="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/infoPage.jsp" value="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp" />
+        <entry key="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/issuepage.jsp" value="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp" />
+        <entry key="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/itemsPage.jsp" value="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp" />
+        <entry key="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/logpage.jsp" value="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp" />
+        <entry key="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp/waitPage.jsp" value="file://$PROJECT_DIR$/WebContent/WEB-INF/jsp" />
+      </map>
+    </option>
+  </component>
+</project>

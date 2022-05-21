@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hj.dao.LeaveMapper" >
+  <resultMap id="BaseResultMap" type="com.hj.pojo.Leave" >
+    <result column="lreason" property="lreason" jdbcType="VARCHAR" />
+    <result column="ldate" property="ldate" jdbcType="TIMESTAMP" />
+    <result column="ltype" property="ltype" jdbcType="VARCHAR" />
+    <result column="passdate" property="passdate" jdbcType="TIMESTAMP" />
+    <result column="pnum" property="pnum" jdbcType="VARCHAR" />
+    <result column="lid" property="lid" jdbcType="INTEGER" />
+    <result column="continueman" property="continueman" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insertLeaveCord" parameterType="com.hj.pojo.Leave">
+    INSERT INTO `leave`(lreason,ltype,ldate, pnum, continueman)
+    VALUES (#{lreason},#{ltype},#{ldate},#{pnum}, #{continueman})
+  </insert>
+  <select id="findLeaveByPnum" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT * FROM `leave` WHERE pnum = #{pnum}
+  </select>
+  <update id="agreeCord">
+    UPDATE `leave` SET passdate = #{passdate} WHERE pnum = #{pnum}
+  </update>
+  <select id="findNullLeave" resultMap="BaseResultMap">
+    SELECT * FROM `leave`
+  </select>
+</mapper>

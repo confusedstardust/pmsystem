@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hj.dao.ApplyMapper">
+  <resultMap id="BaseResultMap" type="com.hj.pojo.Apply">
+    <result column="applyid" jdbcType="INTEGER" property="applyid" />
+    <result column="pnum" jdbcType="VARCHAR" property="pnum" />
+    <result column="applytype" jdbcType="VARCHAR" property="applytype" />
+    <result column="applydetail" jdbcType="VARCHAR" property="applydetail" />
+    <result column="departid" jdbcType="INTEGER" property="departid" />
+    <result column="applytypeid" jdbcType="INTEGER" property="applytypeid" />
+    <result column="applydate" jdbcType="TIMESTAMP" property="applydate" />
+    <result column="confirmdate" jdbcType="TIMESTAMP" property="confirmdate" />
+    <result column="enddate" jdbcType="TIMESTAMP" property="enddate" />
+    <result column="startdate" jdbcType="TIMESTAMP" property="startdate" />
+    <result column="denyreason" jdbcType="VARCHAR" property="denyreason" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    applyid, pnum, applytype, applydetail, departid, applytypeid, applydate, departroot, 
+    enddate
+  </sql>
+  <select id="selectByExample" parameterType="com.hj.pojo.ApplyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from apply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.hj.pojo.ApplyExample">
+    delete from apply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hj.pojo.Apply">
+    insert into apply (applyid, pnum, applytype, 
+      applydetail, departid, applytypeid, 
+      applydate, departroot, enddate
+      )
+    values (#{applyid,jdbcType=INTEGER}, #{pnum,jdbcType=VARCHAR}, #{applytype,jdbcType=VARCHAR}, 
+      #{applydetail,jdbcType=VARCHAR}, #{departid,jdbcType=INTEGER}, #{applytypeid,jdbcType=INTEGER}, 
+      #{applydate,jdbcType=TIMESTAMP}, #{departroot,jdbcType=VARCHAR}, #{enddate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hj.pojo.Apply">
+    insert into apply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="applyid != null">
+        applyid,
+      </if>
+      <if test="pnum != null">
+        pnum,
+      </if>
+      <if test="applytype != null">
+        applytype,
+      </if>
+      <if test="applydetail != null">
+        applydetail,
+      </if>
+      <if test="departid != null">
+        departid,
+      </if>
+      <if test="applytypeid != null">
+        applytypeid,
+      </if>
+      <if test="applydate != null">
+        applydate,
+      </if>
+      <if test="departroot != null">
+        departroot,
+      </if>
+      <if test="enddate != null">
+        enddate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="applyid != null">
+        #{applyid,jdbcType=INTEGER},
+      </if>
+      <if test="pnum != null">
+        #{pnum,jdbcType=VARCHAR},
+      </if>
+      <if test="applytype != null">
+        #{applytype,jdbcType=VARCHAR},
+      </if>
+      <if test="applydetail != null">
+        #{applydetail,jdbcType=VARCHAR},
+      </if>
+      <if test="departid != null">
+        #{departid,jdbcType=INTEGER},
+      </if>
+      <if test="applytypeid != null">
+        #{applytypeid,jdbcType=INTEGER},
+      </if>
+      <if test="applydate != null">
+        #{applydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="departroot != null">
+        #{departroot,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hj.pojo.ApplyExample" resultType="java.lang.Integer">
+    select count(*) from apply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update apply
+    <set>
+      <if test="record.applyid != null">
+        applyid = #{record.applyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pnum != null">
+        pnum = #{record.pnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applytype != null">
+        applytype = #{record.applytype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applydetail != null">
+        applydetail = #{record.applydetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departid != null">
+        departid = #{record.departid,jdbcType=INTEGER},
+      </if>
+      <if test="record.applytypeid != null">
+        applytypeid = #{record.applytypeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.applydate != null">
+        applydate = #{record.applydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.departroot != null">
+        departroot = #{record.departroot,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enddate != null">
+        enddate = #{record.enddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update apply
+    set applyid = #{record.applyid,jdbcType=INTEGER},
+      pnum = #{record.pnum,jdbcType=VARCHAR},
+      applytype = #{record.applytype,jdbcType=VARCHAR},
+      applydetail = #{record.applydetail,jdbcType=VARCHAR},
+      departid = #{record.departid,jdbcType=INTEGER},
+      applytypeid = #{record.applytypeid,jdbcType=INTEGER},
+      applydate = #{record.applydate,jdbcType=TIMESTAMP},
+      departroot = #{record.departroot,jdbcType=VARCHAR},
+      enddate = #{record.enddate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+
+
+<!--  传入对象模板-->
+  <insert id="insertApplyCord" parameterType="com.hj.pojo.Apply">
+    insert into apply (pnum, applytype,
+                       applydetail, departid,
+                       applydate, enddate,startdate,applytypeid
+    )
+    values ( #{pnum}, #{applytype},
+            #{applydetail}, #{departid},
+            #{applydate}, #{enddate},#{startdate},#{applytypeid}
+           )
+  </insert>
+
+  <select id="queryAllCordByPnum" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from apply where pnum=#{pnum}
+  </select>
+  <select id="queryAllCordByStatus" parameterType="java.lang.Integer" resultType="map">
+    SELECT a.* ,p.pname
+    FROM apply a
+           JOIN
+         police p
+         ON a.pnum=p.pnum
+    WHERE
+      a.applytypeid=#{applytypeid}
+  </select>
+  <update id="dealHolidayStatus" >
+    update apply
+    set confirmdate = #{confirmdate},
+        applytypeid = #{applytypeid}
+    where applyid = #{applyid}
+  </update>
+
+  <update id="denyHoliday" >
+    update apply
+    set confirmdate = #{confirmdate},
+        applytypeid = #{applytypeid},
+        denyreason=#{denyreason}
+    where applyid = #{applyid}
+  </update>
+</mapper>

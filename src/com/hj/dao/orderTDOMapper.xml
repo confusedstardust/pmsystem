@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hj.dao.orderTDOMapper" >
+    <resultMap id="BaseResultMap" type="com.hj.pojo.Order" >
+        <result column="orderid" property="orderid" jdbcType="VARCHAR" />
+        <result column="pnum" property="pnum" jdbcType="VARCHAR" />
+        <result column="orderdate" property="orderdate" jdbcType="TIMESTAMP" />
+        <result column="orderstatus" property="orderstatus" jdbcType="INTEGER" />
+        <result column="judgereason" property="judgereason" jdbcType="VARCHAR" />
+        <result column="dealdate" property="dealdate" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <resultMap id="Map02" extends="BaseResultMap" type="com.hj.pojo.TDO.OrderTDO" >
+        <result column="pname" property="pname" jdbcType="VARCHAR" />
+        <result column="pnum" property="pnum" jdbcType="VARCHAR" />
+        <collection property="itemsList" ofType="com.hj.pojo.Items" javaType="com.hj.pojo.Items">
+            <result column=" i.itemsname" property="itemsname"/>
+<!--            <result column="itemsid" property="itemsid"/>-->
+        </collection>
+    </resultMap>
+
+    <select id="checkCordByStatus" resultMap="Map02" parameterType="java.lang.Integer" >
+        SELECT DISTINCT
+            o.*,
+            p.pname
+        FROM
+            `order` o
+                JOIN orderdetail od ON o.orderid = od.orderid
+                JOIN police p ON p.pnum = o.pnum
+        WHERE
+            o.orderstatus =#{orderstatus}
+    </select>
+</mapper>

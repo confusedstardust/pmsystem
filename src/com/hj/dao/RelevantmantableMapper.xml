@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hj.dao.RelevantmantableMapper" >
+  <resultMap id="BaseResultMap" type="com.hj.pojo.Relevantmantable" >
+    <result column="relevantname" property="relevantname" jdbcType="VARCHAR" />
+    <result column="relevantaddress" property="relevantaddress" jdbcType="VARCHAR" />
+    <result column="relevanttel" property="relevanttel" jdbcType="VARCHAR" />
+    <result column="relevantidcard" property="relevantidcard" jdbcType="VARCHAR" />
+    <result column="isssueid" property="isssueid" jdbcType="VARCHAR" />
+    <result column="relevantid" property="relevantid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    relevantname, relevantaddress, relevanttel, relevantidcard, isssueid, relevantid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hj.pojo.RelevantmantableExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from relevantmantable
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.hj.pojo.RelevantmantableExample" >
+    delete from relevantmantable
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hj.pojo.Relevantmantable" >
+    insert into relevantmantable (relevantname, relevantaddress, relevanttel, 
+      relevantidcard, isssueid, relevantid
+      )
+    values (#{relevantname,jdbcType=VARCHAR}, #{relevantaddress,jdbcType=VARCHAR}, #{relevanttel,jdbcType=VARCHAR}, 
+      #{relevantidcard,jdbcType=VARCHAR}, #{isssueid,jdbcType=VARCHAR}, #{relevantid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hj.pojo.Relevantmantable" >
+    insert into relevantmantable
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="relevantname != null" >
+        relevantname,
+      </if>
+      <if test="relevantaddress != null" >
+        relevantaddress,
+      </if>
+      <if test="relevanttel != null" >
+        relevanttel,
+      </if>
+      <if test="relevantidcard != null" >
+        relevantidcard,
+      </if>
+      <if test="isssueid != null" >
+        isssueid,
+      </if>
+      <if test="relevantid != null" >
+        relevantid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="relevantname != null" >
+        #{relevantname,jdbcType=VARCHAR},
+      </if>
+      <if test="relevantaddress != null" >
+        #{relevantaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="relevanttel != null" >
+        #{relevanttel,jdbcType=VARCHAR},
+      </if>
+      <if test="relevantidcard != null" >
+        #{relevantidcard,jdbcType=VARCHAR},
+      </if>
+      <if test="isssueid != null" >
+        #{isssueid,jdbcType=VARCHAR},
+      </if>
+      <if test="relevantid != null" >
+        #{relevantid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hj.pojo.RelevantmantableExample" resultType="java.lang.Integer" >
+    select count(*) from relevantmantable
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update relevantmantable
+    <set >
+      <if test="record.relevantname != null" >
+        relevantname = #{record.relevantname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relevantaddress != null" >
+        relevantaddress = #{record.relevantaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relevanttel != null" >
+        relevanttel = #{record.relevanttel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relevantidcard != null" >
+        relevantidcard = #{record.relevantidcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isssueid != null" >
+        isssueid = #{record.isssueid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relevantid != null" >
+        relevantid = #{record.relevantid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update relevantmantable
+    set relevantname = #{record.relevantname,jdbcType=VARCHAR},
+      relevantaddress = #{record.relevantaddress,jdbcType=VARCHAR},
+      relevanttel = #{record.relevanttel,jdbcType=VARCHAR},
+      relevantidcard = #{record.relevantidcard,jdbcType=VARCHAR},
+      isssueid = #{record.isssueid,jdbcType=VARCHAR},
+      relevantid = #{record.relevantid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+  
+  <insert id="insertRelevantman" parameterType="com.hj.pojo.Relevantmantable">
+    insert into relevantmantable (relevantname, relevantaddress,
+                                  relevanttel, relevantidcard,
+                                  isssueid)
+    values ( #{relevantname}, #{relevantaddress},
+             #{relevanttel}, #{relevantidcard},
+             #{isssueid})
+  </insert>
+  <select id="queryrlmbyissueid" parameterType="java.lang.String" resultType="com.hj.pojo.Relevantmantable">
+    select  * from Relevantmantable where isssueid=#{issueid}
+  </select>
+
+</mapper>

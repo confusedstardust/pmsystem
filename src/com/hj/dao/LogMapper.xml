@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hj.dao.LogMapper" >
+  <resultMap id="BaseResultMap" type="com.hj.pojo.Log" >
+    <result column="logid" property="logid" jdbcType="INTEGER" />
+    <result column="logdate" property="logdate" jdbcType="TIMESTAMP" />
+    <result column="logdetail" property="logdetail" jdbcType="VARCHAR" />
+    <result column="pnum" property="pnum" jdbcType="VARCHAR" />
+    <result column="issueid" property="issueid" jdbcType="VARCHAR" />
+    <result column="logtype" property="logtype" jdbcType="INTEGER" />
+    <result column="logtitle" property="logtitle" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    logid, logdate, logdetail, pnum, issueid, logtype, logtitle
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hj.pojo.LogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.hj.pojo.LogExample" >
+    delete from log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hj.pojo.Log" >
+    insert into log (logid, logdate, logdetail, 
+      pnum, issueid, logtype, 
+      logtitle)
+    values (#{logid,jdbcType=INTEGER}, #{logdate,jdbcType=TIMESTAMP}, #{logdetail,jdbcType=VARCHAR}, 
+      #{pnum,jdbcType=VARCHAR}, #{issueid,jdbcType=VARCHAR}, #{logtype,jdbcType=INTEGER}, 
+      #{logtitle,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hj.pojo.Log" >
+    insert into log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logid != null" >
+        logid,
+      </if>
+      <if test="logdate != null" >
+        logdate,
+      </if>
+      <if test="logdetail != null" >
+        logdetail,
+      </if>
+      <if test="pnum != null" >
+        pnum,
+      </if>
+      <if test="issueid != null" >
+        issueid,
+      </if>
+      <if test="logtype != null" >
+        logtype,
+      </if>
+      <if test="logtitle != null" >
+        logtitle,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logid != null" >
+        #{logid,jdbcType=INTEGER},
+      </if>
+      <if test="logdate != null" >
+        #{logdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logdetail != null" >
+        #{logdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="pnum != null" >
+        #{pnum,jdbcType=VARCHAR},
+      </if>
+      <if test="issueid != null" >
+        #{issueid,jdbcType=VARCHAR},
+      </if>
+      <if test="logtype != null" >
+        #{logtype,jdbcType=INTEGER},
+      </if>
+      <if test="logtitle != null" >
+        #{logtitle,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hj.pojo.LogExample" resultType="java.lang.Integer" >
+    select count(*) from log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update log
+    <set >
+      <if test="record.logid != null" >
+        logid = #{record.logid,jdbcType=INTEGER},
+      </if>
+      <if test="record.logdate != null" >
+        logdate = #{record.logdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.logdetail != null" >
+        logdetail = #{record.logdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pnum != null" >
+        pnum = #{record.pnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueid != null" >
+        issueid = #{record.issueid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logtype != null" >
+        logtype = #{record.logtype,jdbcType=INTEGER},
+      </if>
+      <if test="record.logtitle != null" >
+        logtitle = #{record.logtitle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update log
+    set logid = #{record.logid,jdbcType=INTEGER},
+      logdate = #{record.logdate,jdbcType=TIMESTAMP},
+      logdetail = #{record.logdetail,jdbcType=VARCHAR},
+      pnum = #{record.pnum,jdbcType=VARCHAR},
+      issueid = #{record.issueid,jdbcType=VARCHAR},
+      logtype = #{record.logtype,jdbcType=INTEGER},
+      logtitle = #{record.logtitle,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <insert id="insertLog" parameterType="com.hj.pojo.Log">
+    insert into log (logdate, logdetail,
+                       pnum, logtitle,
+                       issueid,logtype)
+    values ( #{logdate}, #{logdetail},
+             #{pnum}, #{logtitle},
+             #{issueid},#{logtype})
+  </insert>
+  <select id="queryWorkLog" parameterType="java.lang.String" resultType="com.hj.pojo.Log">
+    select * from log where pnum=#{pnum} and issueid='1' ORDER BY logdate asc
+  </select>
+  <select id="queryIssueLog" parameterType="java.lang.String" resultType="com.hj.pojo.Log">
+    select * from log where pnum=#{pnum} and issueid!='1' ORDER BY logdate desc
+  </select>
+  <update id="updateLog" parameterType="com.hj.pojo.Log">
+    update log
+    set logdetail = #{logdetail}
+        where issueid= #{issueid}
+  </update>
+  <select id="queryByname" parameterType="java.lang.String" resultType="com.hj.pojo.Log">
+    select * from log where pnum=#{pnum} and logtitle like concat('%',#{arg},'%') and logtype='2'
+  </select>
+  <select id="queryByIssueid" parameterType="java.lang.String" resultType="com.hj.pojo.Log">
+    select * from log where pnum=#{pnum} and issueid=#{arg}  and logtype='2'
+  </select>
+</mapper>
